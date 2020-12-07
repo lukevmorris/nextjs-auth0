@@ -1,5 +1,5 @@
 import { ITokenCache } from './tokens/token-cache';
-import { IClaims, ISession } from './session/session';
+import { ISession } from './session/session';
 import { ISignInWithAuth0 } from './instance';
 
 export default function createDummyBrowserInstance(): ISignInWithAuth0 & { isBrowser: boolean } {

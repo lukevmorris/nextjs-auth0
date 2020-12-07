@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage } from 'http';
-import { IClaims, ISession } from './session/session';
+import { ISession } from './session/session';
 import { LoginOptions } from './handlers/login';
 import { ITokenCache } from './tokens/token-cache';
 import { CallbackOptions } from './handlers/callback';
