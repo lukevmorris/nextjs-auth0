@@ -3,7 +3,7 @@ import { NextApiResponse, NextApiRequest } from 'next';
 import tokenCacheHandler from './token-cache';
 import { ISessionStore } from '../session/store';
 import { IOidcClientFactory } from '../utils/oidc-client';
-import { ISession } from 'session/session';
+import { IClaims, ISession } from 'session/session';
 
 export type ProfileOptions = {
   refetch?: boolean;
@@ -39,7 +39,7 @@ export function ProfileHandler(sessionStore: ISessionStore, clientProvider: IOid
 }
 
 export function RefreshProfile(sessionStore: ISessionStore, clientProvider: IOidcClientFactory) {
-  return async (req: NextApiRequest, res: NextApiResponse, session: ISession): Promise<void> => {
+  return async (req: NextApiRequest, res: NextApiResponse, session: ISession): Promise<IClaims> => {
     const tokenCache = tokenCacheHandler(clientProvider, sessionStore)(req, res);
     const { accessToken } = await tokenCache.getAccessToken();
     if (!accessToken) {
