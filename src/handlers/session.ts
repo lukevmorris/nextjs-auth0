@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { IOidcClientFactory } from 'utils/oidc-client';
+import { IOidcClientFactory } from '../utils/oidc-client';
 
 import { ISession } from '../session/session';
 import { ISessionStore } from '../session/store';
@@ -28,7 +28,7 @@ export function RefreshSession(sessionStore: ISessionStore, clientProvider: IOid
 
     const session = await sessionStore.read(req);
     if (!session || !session.user) {
-      return;
+      return null;
     }
 
     const tokenCache = tokenCacheHandler(clientProvider, sessionStore)(req, res);
