@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage } from 'http';
-import { ISession } from './session/session';
+import { IClaims, ISession } from './session/session';
 import { LoginOptions } from './handlers/login';
 import { ITokenCache } from './tokens/token-cache';
 import { CallbackOptions } from './handlers/callback';
@@ -28,6 +28,11 @@ export interface ISignInWithAuth0 {
    * Profile handler which return profile information about the user.
    */
   handleProfile: (req: NextApiRequest, res: NextApiResponse, options?: ProfileOptions) => Promise<void>;
+
+  /**
+   * Refresh Profile handler which updates session object with up-to-date user profile
+   */
+  refreshProfile: (req: NextApiRequest, res: NextApiResponse, session: ISession) => Promise<IClaims>;
 
   /**
    * Session handler which returns the current session

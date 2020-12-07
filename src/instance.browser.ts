@@ -1,5 +1,5 @@
 import { ITokenCache } from './tokens/token-cache';
-import { ISession } from './session/session';
+import { IClaims, ISession } from './session/session';
 import { ISignInWithAuth0 } from './instance';
 
 export default function createDummyBrowserInstance(): ISignInWithAuth0 & { isBrowser: boolean } {
@@ -16,6 +16,9 @@ export default function createDummyBrowserInstance(): ISignInWithAuth0 & { isBro
     },
     handleProfile: (): Promise<void> => {
       throw new Error('The handleProfile method can only be used from the server side');
+    },
+    refreshProfile: (): Promise<IClaims> => {
+      throw new Error('The refreshProfile method can only be used from the server side');
     },
     getSession: (): Promise<ISession | null | undefined> => {
       throw new Error('The getSession method can only be used from the server side');

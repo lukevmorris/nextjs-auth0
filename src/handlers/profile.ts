@@ -3,12 +3,13 @@ import { NextApiResponse, NextApiRequest } from 'next';
 import tokenCacheHandler from './token-cache';
 import { ISessionStore } from '../session/store';
 import { IOidcClientFactory } from '../utils/oidc-client';
+import { IClaims, ISession } from 'session/session';
 
 export type ProfileOptions = {
   refetch?: boolean;
 };
 
-export default function profileHandler(sessionStore: ISessionStore, clientProvider: IOidcClientFactory) {
+export function ProfileHandler(sessionStore: ISessionStore, clientProvider: IOidcClientFactory) {
   return async (req: NextApiRequest, res: NextApiResponse, options?: ProfileOptions): Promise<void> => {
     if (!req) {
       throw new Error('Request is not available');
@@ -27,30 +28,37 @@ export default function profileHandler(sessionStore: ISessionStore, clientProvid
       return;
     }
 
+    let userResponse = session.user;
+
     if (options && options.refetch) {
-      const tokenCache = tokenCacheHandler(clientProvider, sessionStore)(req, res);
-      const { accessToken } = await tokenCache.getAccessToken();
-      if (!accessToken) {
-        throw new Error('No access token available to refetch the profile');
-      }
-
-      const client = await clientProvider();
-      const userInfo = await client.userinfo(accessToken);
-
-      const updatedUser = {
-        ...session.user,
-        ...userInfo
-      };
-
-      await sessionStore.save(req, res, {
-        ...session,
-        user: updatedUser
-      });
-
-      res.json(updatedUser);
-      return;
+      userResponse = await RefreshProfile(sessionStore, clientProvider)(req, res, session);
     }
 
-    res.json(session.user);
+    res.json(userResponse);
+  };
+}
+
+export function RefreshProfile(sessionStore: ISessionStore, clientProvider: IOidcClientFactory) {
+  return async (req: NextApiRequest, res: NextApiResponse, session: ISession): Promise<IClaims> => {
+    const tokenCache = tokenCacheHandler(clientProvider, sessionStore)(req, res);
+    const { accessToken } = await tokenCache.getAccessToken();
+    if (!accessToken) {
+      throw new Error('No access token available to refetch the profile');
+    }
+
+    const client = await clientProvider();
+    const userInfo = await client.userinfo(accessToken);
+
+    const updatedUser = {
+      ...session.user,
+      ...userInfo
+    };
+
+    await sessionStore.save(req, res, {
+      ...session,
+      user: updatedUser
+    });
+
+    return updatedUser;
   };
 }
