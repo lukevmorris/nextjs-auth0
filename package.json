@@ -1,5 +1,5 @@
 {
-  "name": "@auth0/nextjs-auth0",
+  "name": "@lukevmorris/nextjs-auth0",
   "version": "0.16.0",
   "description": "Next.js SDK for signing in with Auth0",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/auth0/nextjs-auth0.git"
+    "url": "git+https://github.com/lukevmorris/nextjs-auth0.git"
   },
   "keywords": [
     "auth0",
@@ -33,12 +33,12 @@
     "authentication",
     "zeit"
   ],
-  "author": "Auth0 (https://auth0.com)",
+  "author": "Luke Morris (branch of Auth0 code)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/auth0/nextjs-auth0/issues"
+    "url": "https://github.com/lukevmorris/nextjs-auth0/issues"
   },
-  "homepage": "https://github.com/auth0/nextjs-auth0#readme",
+  "homepage": "https://github.com/lukevmorris/nextjs-auth0#readme",
   "devDependencies": {
     "@panva/jose": "^1.9.3",
     "@types/cookie": "^0.3.3",
