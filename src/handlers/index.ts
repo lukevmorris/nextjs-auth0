@@ -2,7 +2,7 @@ import LoginHandler from './login';
 import LogoutHandler from './logout';
 import CallbackHandler from './callback';
 import { ProfileHandler, RefreshProfile } from './profile';
-import SessionHandler from './session';
+import SessionHandler, { RefreshSession } from './session';
 import RequireAuthentication from './require-authentication';
 import TokenCache from './token-cache';
 
@@ -13,6 +13,7 @@ export default {
   ProfileHandler,
   RefreshProfile,
   SessionHandler,
+  RefreshSession,
   RequireAuthentication,
   TokenCache
 };

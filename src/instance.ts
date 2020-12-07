@@ -32,7 +32,7 @@ export interface ISignInWithAuth0 {
   /**
    * Refresh Profile handler which updates session object with up-to-date user profile
    */
-  refreshProfile: (req: NextApiRequest, res: NextApiResponse, session: ISession) => Promise<IClaims>;
+  refreshSession: (req: NextApiRequest, res: NextApiResponse) => Promise<ISession | null | undefined>;
 
   /**
    * Session handler which returns the current session

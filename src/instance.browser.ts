@@ -17,8 +17,8 @@ export default function createDummyBrowserInstance(): ISignInWithAuth0 & { isBro
     handleProfile: (): Promise<void> => {
       throw new Error('The handleProfile method can only be used from the server side');
     },
-    refreshProfile: (): Promise<IClaims> => {
-      throw new Error('The refreshProfile method can only be used from the server side');
+    refreshSession: (): Promise<ISession | null | undefined> => {
+      throw new Error('The refreshSession method can only be used from the server side');
     },
     getSession: (): Promise<ISession | null | undefined> => {
       throw new Error('The getSession method can only be used from the server side');
