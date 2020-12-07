@@ -1,9 +1,9 @@
 import { NextApiResponse, NextApiRequest } from 'next';
 
+import { IClaims, ISession } from '../session/session';
 import tokenCacheHandler from './token-cache';
 import { ISessionStore } from '../session/store';
 import { IOidcClientFactory } from '../utils/oidc-client';
-import { IClaims, ISession } from 'session/session';
 
 export type ProfileOptions = {
   refetch?: boolean;
