@@ -31,7 +31,7 @@ export function ProfileHandler(sessionStore: ISessionStore, clientProvider: IOid
     let userResponse = session.user;
 
     if (options && options.refetch) {
-      userResponse = RefreshProfile(sessionStore, clientProvider)(req, res, session);
+      userResponse = await RefreshProfile(sessionStore, clientProvider)(req, res, session);
     }
 
     res.json(userResponse);
