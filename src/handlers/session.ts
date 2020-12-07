@@ -44,7 +44,7 @@ export function RefreshSession(sessionStore: ISessionStore, clientProvider: IOid
       ...session,
       user: {
         ...session.user,
-        userInfo
+        ...userInfo
       }
     };
 
